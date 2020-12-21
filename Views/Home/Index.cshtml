@@ -1,0 +1,11 @@
+﻿@model HomeViewModel
+
+<h1>Популярное</h1>
+<div class="row mb-5 mb-2">
+    @{
+        foreach (Lamp lamp in Model.FavLamps)
+        {
+            @Html.Partial("AllLamps", lamp)
+        }
+    }
+</div>

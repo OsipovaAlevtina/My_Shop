@@ -46,7 +46,7 @@ namespace MyShop.Data.Info
                         LongDesc = "Яркий настенный светильник. Цвет: синий. Высота: 35см.",
                         Img = "/Img/bird.jpg",
                         Price = 2100,
-                        IfFavourite = true,
+                        IfFavourite = false,
                         Available = true,
                         Category = _categoryLamps.AllCategories.First()
                     },
@@ -57,7 +57,7 @@ namespace MyShop.Data.Info
                         LongDesc = "Украшение для стен комнаты. Цвет: розовый. Размер: 30х70см.",
                         Img = "/Img/hello.jpg",
                         Price = 2700,
-                        IfFavourite = true,
+                        IfFavourite = false,
                         Available = true,
                         Category = _categoryLamps.AllCategories.Last()
                     },
@@ -68,7 +68,7 @@ namespace MyShop.Data.Info
                         LongDesc = "Атмосферная вывеска для крупных пемещений. Цвет: красно-оранжевый. Размер: 50х150см.",
                         Img = "/Img/smile.jpg",
                         Price = 3600,
-                        IfFavourite = true,
+                        IfFavourite = false,
                         Available = true,
                         Category = _categoryLamps.AllCategories.Last()
                     },
