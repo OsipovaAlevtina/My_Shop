@@ -22,6 +22,7 @@ namespace MyShop.Data.Repository
         {
             order.OrderTime = DateTime.Now;
             appDBContent.Order.Add(order);
+            appDBContent.SaveChanges();
 
             var Items = shopCart.ListShopItems;
 
