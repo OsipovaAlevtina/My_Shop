@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MyShop.Data.Interfaces;
+using MyShop.Data.Models;
 using MyShop.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -19,16 +20,42 @@ namespace MyShop.Controllers
             _allCategories = iLampsCat;
         }
 
-        public ViewResult List()
+        [Route("Lamps/List")]
+        [Route("Lamps/List/{category}")]
+
+        public ViewResult List(string category)
         {
+            string _category = category;
+            IEnumerable<Lamp> Lamps = null;
+            string LampCategory = "";
+            if (string.IsNullOrEmpty(category))
+            {
+                Lamps = _allLamps.Lamps.OrderBy(i => i.Id);
+            }
+            else
+            {
+                if (string.Equals("figure", category, StringComparison.OrdinalIgnoreCase))
+                {
+                    Lamps = _allLamps.Lamps.Where(i => i.Category.CategoryName.Equals("Фигурные")).OrderBy(i => i.Id);
+                    LampCategory = "Фигурные";
+                }
+                else if (string.Equals("signage", category, StringComparison.OrdinalIgnoreCase))
+                {
+                    Lamps = _allLamps.Lamps.Where(i => i.Category.CategoryName.Equals("Вывески")).OrderBy(i => i.Id);
+                    LampCategory = "Вывески";
+                }
+
+                
+            }
+            var lampObj = new LampsListViewModel
+            {
+                AllLamps = Lamps,
+                LampCategory = LampCategory
+            };
+
             ViewBag.Title = "Neon";
-            LampsListViewModel obj = new LampsListViewModel();
-            obj.AllLamps = _allLamps.Lamps;
-            obj.LampCategory = "Светильники";
 
-            return View(obj);
-           
+            return View(lampObj);
         }
-
     }
 }

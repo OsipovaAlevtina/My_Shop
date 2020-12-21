@@ -52,8 +52,12 @@ namespace MyShop
             app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseSession();
-            app.UseMvcWithDefaultRoute();
-
+            //app.UseMvcWithDefaultRoute();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{Id?}");
+                routes.MapRoute(name: "categoryFilter", template: "Lamp/{action}/{category?}", defaults: new { Controller = "Lamp", action = "List" });
+            });
             
             using (var scope = app.ApplicationServices.CreateScope())
             {
