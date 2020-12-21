@@ -1,0 +1,10 @@
+﻿<h1>Неоновые светильники</h1>
+<h3>@Model.LampCategory</h3>
+<div class="row mb-5 mb-2">
+    @{ 
+        foreach (Lamp lamp in Model.AllLamps)
+        { 
+            @Html.Partial("AllLamps", lamp)
+        }
+    }
+</div>
