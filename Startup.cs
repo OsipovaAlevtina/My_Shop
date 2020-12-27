@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MyShop.Data.Repository;
 using MyShop.Data.Models;
+using WebAPIApp.Models;
 
 namespace MyShop
 {
@@ -35,6 +36,12 @@ namespace MyShop
             services.AddTransient<ILampsCategory, CategoryRepository>();
             services.AddTransient<IAllOrders, OrdersRepository>();
 
+            string con = "Server=(localdb)\\mssqllocaldb;Database=usersdbstore;Trusted_Connection=True;";
+            // устанавливаем контекст данных
+            services.AddDbContext<UsersContext>(options => options.UseSqlServer(con));
+
+            services.AddControllers(); // используем контроллеры без представлений
+
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped(sp => ShopCart.GetCart(sp));
 
@@ -54,6 +61,14 @@ namespace MyShop
             app.UseStaticFiles();
             app.UseSession();
             //app.UseMvcWithDefaultRoute();
+
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers(); // подключаем маршрутизацию на контроллеры
+            });
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{Id?}");
